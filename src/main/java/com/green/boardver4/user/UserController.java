@@ -1,10 +1,9 @@
 package com.green.boardver4.user;
 
-import com.green.boardver4.common.ResultDto;
+import com.green.boardver4.common.model.ResultDto;
 import com.green.boardver4.user.model.PatchPassword;
 import com.green.boardver4.user.model.PostSignIn;
 import com.green.boardver4.user.model.PostUser;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PostMapping;

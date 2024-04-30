@@ -18,6 +18,30 @@
         AND writer_id = #{writerId}
     </update>
 
+    <select id="getComments">
+        SELECT B.board_id AS boardId, A.comment_id AS commentId, A.comment_contents AS contents,
+               A.writer_id AS writerId, C.nm AS writerNm, A.created_at AS createdAt
+        FROM comment A
+        INNER JOIN board B
+        ON A.writer_id = B.writer_id
+        INNER JOIN user C
+        ON B.writer_id = C.user_id
+        WHERE A.board_id = #{boardId}
+        ORDER BY commentId
+        LIMIT #{startIdx}, #{size}
+    </select>
+
+    <select id="getTotalCommentPage">
+        SELECT CEIL(COUNT(comment_id) / #{size})
+        FROM comment
+        WHERE board_id = #{boardId}
+    </select>
+
+    <select id="countComment">
+        SELECT COUNT(comment_id)
+        FROM comment
+    </select>
+
     <delete id="delComment">
         DELETE FROM comment
         WHERE comment_id = #{commentId}

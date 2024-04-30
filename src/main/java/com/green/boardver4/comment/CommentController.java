@@ -1,12 +1,13 @@
 package com.green.boardver4.comment;
 
-import com.green.boardver4.comment.model.DelCommentReq;
-import com.green.boardver4.comment.model.PostCommentReq;
-import com.green.boardver4.comment.model.PutCommentReq;
-import com.green.boardver4.common.ResultDto;
+import com.green.boardver4.comment.model.*;
+import com.green.boardver4.common.model.Paging;
+import com.green.boardver4.common.model.ResultDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -42,5 +43,19 @@ public class CommentController {
                 httpStatus(HttpStatus.OK).
                 resultMsg(HttpStatus.OK.toString()).
                 resultData(result).build();
+    }
+    @GetMapping
+    private ResultDto<List<GetCommentRes>> getComments(@ModelAttribute CommentPaging p){
+        List<GetCommentRes> list = service.getComments(p);
+        String Msg = String.format("row: %d", list.size());
+        if(p.getSize() > 0 && p.getSize() > list.size()){
+            Msg += String.format(", total: %d", service.countComment());
+        }
+        //p.getSize() != list.size()
+        //(p.getPage() - 1) * p.getSize() + list.size() = countComment
+        return ResultDto.<List<GetCommentRes>>builder().
+                                        httpStatus(HttpStatus.OK).
+                                        resultMsg(Msg).
+                                        resultData(list).build();
     }
 }

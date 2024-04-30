@@ -6,5 +6,5 @@ import lombok.Data;
 public class PostCommentReq {
     private String commentContents;
     private long writerId;
-    private long commentId;
+    private long boardId;
 }

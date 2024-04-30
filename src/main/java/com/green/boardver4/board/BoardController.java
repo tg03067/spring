@@ -1,12 +1,12 @@
 package com.green.boardver4.board;
 
 import com.green.boardver4.board.model.*;
-import com.green.boardver4.common.ResultDto;
+import com.green.boardver4.common.model.ResultDto;
+import com.green.boardver4.common.model.Paging;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.ResultSet;
 import java.util.List;
 
 @RestController
@@ -44,7 +44,7 @@ public class BoardController {
     }
 
     @GetMapping("GetBoardList")
-    public ResultDto<List<GetBoardList>> getBoardList(@ModelAttribute PageBoard boardId){
+    public ResultDto<List<GetBoardList>> getBoardList(@ModelAttribute Paging boardId){
         List<GetBoardList> list = service.getBoardLists(boardId);
 
         return ResultDto.<List<GetBoardList>>builder().
