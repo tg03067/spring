@@ -15,7 +15,7 @@ import java.util.List;
 public class BoardController {
     private final BoardService service;
 
-    @PostMapping("InsertBoard")
+    @PostMapping
     public ResultDto<Integer> postBoard(@RequestBody PostBoard p){
         int result = service.postBoard(p);
 
@@ -24,7 +24,7 @@ public class BoardController {
                 resultMsg(HttpStatus.OK.toString()).
                 resultData(result).build();
     }
-    @DeleteMapping("DelBoard")
+    @DeleteMapping
     public ResultDto<Integer> delBoard(@RequestParam(name = "board_id") PostBoard p){
         int result = service.delBoard(p);
 
@@ -33,7 +33,7 @@ public class BoardController {
                 resultMsg(HttpStatus.OK.toString()).
                 resultData(result).build();
     }
-    @PutMapping("PutBoard")
+    @PutMapping
     public ResultDto<Integer> putBoard(@RequestBody PutBoard p){
         int result = service.putBoard(p);
 
@@ -42,6 +42,7 @@ public class BoardController {
                 resultMsg(HttpStatus.OK.toString()).
                 resultData(result).build();
     }
+
     @GetMapping("GetBoardList")
     public ResultDto<List<GetBoardList>> getBoardList(@ModelAttribute PageBoard boardId){
         List<GetBoardList> list = service.getBoardLists(boardId);
@@ -51,6 +52,8 @@ public class BoardController {
                 resultMsg(String.format("rowCount: %d", list.size())).
                 resultData(list).build();
     }
+
+    //http://localhost:8080/board/4
     @GetMapping("{board_id}")
     public ResultDto<GetBoardOne> getBoardOne(@PathVariable(name = "board_id") long p){
         GetBoardOne result = service.getBoardOne(p);

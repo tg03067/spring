@@ -23,6 +23,7 @@ public class BoardService {
     public List<GetBoardList> getBoardLists(PageBoard p){
         return mapper.getBoardList(p);
     }
+
     public GetBoardOne getBoardOne(long boardId){
         GetBoardOne result = mapper.getBoardOne(boardId);
         if(result != null){

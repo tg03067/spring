@@ -7,7 +7,7 @@
         INSERT INTO board
         SET title = #{title}
         , contents = #{contents}
-        , writer_id = #{writer_id}
+        , writer_id = #{writerId}
     </insert>
     <delete id="delBoard">
         DELETE FROM board
