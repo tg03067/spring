@@ -49,7 +49,7 @@ public class CommentController {
         List<GetCommentRes> list = service.getComments(p);
         String Msg = String.format("row: %d", list.size());
         if(p.getSize() > 0 && p.getSize() > list.size()){
-            Msg += String.format(", total: %d", service.countComment());
+            Msg += String.format(", total: %d", (p.getPage() - 1) * p.getSize() + list.size());
         }
         //p.getSize() != list.size()
         //(p.getPage() - 1) * p.getSize() + list.size() = countComment
